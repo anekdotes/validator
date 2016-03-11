@@ -1,0 +1,8 @@
+{
+    "name": "anekdotes/validator",
+    "description": "A validator class to validate form",
+    "require": {
+        "php": ">=5.3.0",
+        "nesbot/carbon": "^1.21"
+    }
+}
