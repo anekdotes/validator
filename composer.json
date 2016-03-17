@@ -1,14 +1,32 @@
 {
-    "name": "anekdotes/validator",
-    "type": "library",
-    "description": "A validator class to validate form",
-    "keywords": [
-      "validation",
-      "test",
-      "form"
-    ],
-    "require": {
-        "php": ">=5.3.0",
-        "nesbot/carbon": "^1.21"
+  "name": "anekdotes/validator",
+  "type": "library",
+  "description": "A validator class to validate inputs",
+  "keywords": [
+    "validation",
+    "test",
+    "form"
+  ],
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Sébastien Roy",
+      "email": "sebastien.roy@anekdotes.com",
+      "homepage": "http://anekdotes.com"
     }
+  ],
+  "require": {
+      "php": ">=5.3.0",
+      "nesbot/carbon": "^1.21"
+  },
+  "autoload": {
+    "psr-4": {
+      "Anekdotes\\": "src/anekdotes/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Tests\\": "tests/"
+    }
+  }
 }
