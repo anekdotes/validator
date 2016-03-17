@@ -155,7 +155,7 @@ class Validator {
    * @return  bool
    */
   public function date($value) {
-    $formats = array("d-m-Y", "d/m/Y");                   // Must add format with time...
+    $formats = array("d-m-Y", "d/m/Y");          // Must add format with time...
     if ($this->required($value)) {
       foreach ($formats as $format) {
         $date = \Carbon::createFromFormat($format, $value);
