@@ -1,28 +1,40 @@
 <?php
 
-/*
+/**
  * This file is part of the Validator package.
- *
  * (c) Anekdotes Communication inc. <info@anekdotes.com>
- *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
+ *
+ * @author Sébastien Roy <sebastien.roy@anekdotes.com>
  */
 
+/** namespace and use */
 namespace Anekdotes;
-
 use Carbon\Carbon;
 
-/**
- * Validator class, validate passed Input
- */
+/** Validator class, validate passed Input */
 class Validator {
 
+  /** Validator items to validate */
   private $items;
+
+  /** Validator rules to validate with */
   private $rules;
+
+  /** Validator current items name to validate */
   private $currentItemName;
+
+  /** Validator error messages */
   public $errors = array();
 
+  /**
+  * Validator make method
+  * @source
+  * @param array $items to validate
+  * @param array $rules to validate with
+  * @return object
+  */
   public static function make($items, $rules) {
     $validator = new Validator();
     $validator->items = $items;
@@ -83,8 +95,8 @@ class Validator {
   /**
    * Check if $value is empty
    *
-   * @param   mixed  value to validate
-   * @return  bool
+   * @param mixed[] $value value to validate
+   * @return bool
    */
   public function required($value) {
     if (is_array($value)){
@@ -99,10 +111,10 @@ class Validator {
    * Check if $value is empty if
    * $itemValue has $condition value
    *
-   * @param   mixed  value to validate
-   * @param   mixed  item value to check
-   * @param   mixed  condition to respect
-   * @return  bool
+   * @param mixed[] $value to validate
+   * @param mixed[] $item value to check
+   * @param mixed[] $condition to respect
+   * @return bool
    */
   public function requiredIf($value, $item, $condition) {
     return $this->items[$item] == $condition ?
@@ -114,9 +126,9 @@ class Validator {
    * Check if $value is empty if
    * $itemValue is not empty
    *
-   * @param   mixed  value to validate
-   * @param   mixed  item value to check
-   * @return  bool
+   * @param mixed[] $value to validate
+   * @param mixed[] $item value to check
+   * @return bool
    */
   public function requiredWith($value, $item) {
     return $this->required($this->items[$item]) ?
@@ -128,9 +140,9 @@ class Validator {
    * Check if $value is empty if
    * $itemValue is empty
    *
-   * @param   mixed  value to validate
-   * @param   mixed  item value to check
-   * @return  bool
+   * @param mixed[] $value to validate
+   * @param mixed[] $item value to check
+   * @return bool
    */
   public function requiredWithout($value, $item) {
     return $this->required($this->items[$item]) ?
@@ -141,8 +153,8 @@ class Validator {
   /**
    * Check if the $value is an integer
    *
-   * @param   mixed  value to validate
-   * @return  bool
+   * @param mixed[] $value to validate
+   * @return bool
    */
   public function integer($value) {
     return $this->required($value) ? is_int($value) : true ;
@@ -151,8 +163,8 @@ class Validator {
   /**
    * Check if the $value is numeric
    *
-   * @param   mixed  value to validate
-   * @return  bool
+   * @param mixed[] $value to validate
+   * @return bool
    */
   public function numeric($value) {
     return $this->required($value) ? is_numeric($value) : true ;
@@ -162,12 +174,11 @@ class Validator {
    * Check if the $value is a date in supported format
    * {"d-m-Y", "d/m/Y"}
    *
-   * @param   string value to validate
-   *
-   * @return  bool
+   * @param string $value to validate
+   * @return bool
    */
   public function date($value) {
-    $formats = array("d-m-Y", "d/m/Y");          // Must add format with time...
+    $formats = array("d-m-Y", "d/m/Y"); // Must add format with time...
     if ($this->required($value)) {
       foreach ($formats as $format) {
         $date = \Carbon::createFromFormat($format, $value);
@@ -184,8 +195,8 @@ class Validator {
    * Check if the $value is different then
    * $params
    *
-   * @param   array {value to vidate, n value to compare}
-   * @return  bool
+   * @param array {value to vidate, n value to compare}
+   * @return bool
    */
   public function different() {
     $params = func_get_args();
@@ -204,8 +215,8 @@ class Validator {
   /**
    * Check if the $value match a email
    *
-   * @param   string  value to validate
-   * @return  bool
+   * @param string $value to validate
+   * @return bool
    */
   public function email($value) {
     return $this->required($value) ?
@@ -216,8 +227,8 @@ class Validator {
   /**
    * Check if the $value match a postal code
    *
-   * @param   string  value to validate
-   * @return  bool
+   * @param string $value to validate
+   * @return bool
    */
   public function postalCode($value) {
     return $this->required($value) ?
@@ -231,8 +242,8 @@ class Validator {
   /**
    * Check if the $value match a phone number
    *
-   * @param   string  value to validate
-   * @return  bool
+   * @param string $value to validate
+   * @return bool
    */
   public function phoneNumber($value) {
     $value = preg_replace("/[^\d]+/", "", $value);
@@ -248,14 +259,14 @@ class Validator {
    * number : test number size
    * file : test file size in kilobytes
    *
-   * @param   mixed    string or number or file
-   * @param   numeric  minimum size to check
-   * @param   numeric  maximum size to check
-   * @return  bool
+   * @param mixed[] $value or number or file
+   * @param numeric $min size to check
+   * @param numeric $max size to check
+   * @return bool
    */
   public function between($value, $min, $max) {
     if ($this->required($value)) {
-      if (is_numeric($value)) {                               // is_numeric or is_integer ?
+      if (is_numeric($value)) { // is_numeric or is_integer ?
         if ($value > $min & $value < $max) {
           return true;
         }
@@ -283,13 +294,13 @@ class Validator {
    * number : test number size
    * file : test file size in kilobytes
    *
-   * @param   mixed    string or number or file
-   * @param   numeric  minimum size to check
-   * @return  bool
+   * @param mixed[] $value or number or file
+   * @param numeric $min size to check
+   * @return bool
    */
   public function minimum($value, $min) {
     if ($this->required($value)) {
-      if (is_numeric($value)) {                               // is_numeric or is_integer ?
+      if (is_numeric($value)) { // is_numeric or is_integer ?
         if ($value > $min) {
           return true;
         }
@@ -317,13 +328,13 @@ class Validator {
    * number : test number size
    * file : test file size in kilobytes
    *
-   * @param   mixed    string or number or file
-   * @param   numeric  maximum size to check
-   * @return  bool
+   * @param mixed[] $value or number or file
+   * @param numeric $max size to check
+   * @return bool
    */
   public function maximum($value, $max) {
     if ($this->required($value)) {
-      if (is_numeric($value)) {                               // is_numeric or is_integer ?
+      if (is_numeric($value)) { // is_numeric or is_integer ?
         if ($value > $max) {
           return true;
         }
@@ -351,13 +362,13 @@ class Validator {
    * number : test number size
    * file : test file size in kilobytes
    *
-   * @param   mixed    string or number or file
-   * @param   numeric  exact size to check
-   * @return  bool
+   * @param mixed[] $value or number or file
+   * @param numeric $size size to check
+   * @return bool
    */
   public function size($value, $size) {
     if ($this->required($value)) {
-      if (is_numeric($value)) {                               // is_numeric or is_integer ?
+      if (is_numeric($value)) { // is_numeric or is_integer ?
         if ($value == $size) {
           return true;
         }
@@ -386,8 +397,9 @@ class Validator {
   /**
    * Check if the $value is exactly $length
    *
-   * @param   mixed    string or number
-   * @return  bool
+   * @param mixed[] $value or number
+   * @param numeric $length length
+   * @return bool
    */
   public function length($value,$length) {
     return strlen($value) == $length ? true : false;
@@ -396,7 +408,7 @@ class Validator {
   /**
    * Check if $value match an URL..
    *
-   * @param  string  value to check
+   * @param string $value to check
    * @return bool
    */
   public function url($value)  {
@@ -416,7 +428,7 @@ class Validator {
   /**
    * Check if $value match an URL and is valid
    *
-   * @param  string  value to check
+   * @param string $value to check
    * @return bool
    */
   public function validUrl($value) {
@@ -428,8 +440,9 @@ class Validator {
   /**
    * Check if _confirmed value is the same
    *
-   * @param   string  value tu check
-   * @return  bool
+   * @param string $value tu check
+   * @param string $item to confirm
+   * @return bool
    */
   public function same($value, $item) {
     return $value === $this->items[$item];
@@ -438,8 +451,8 @@ class Validator {
   /**
    * Check if $item_confirmation value is the same
    *
-   * @param   string  value tu check
-   * @return  bool
+   * @param string $value tu check
+   * @return bool
    */
   public function confirmed($value) {
     return $value === $this->items[$this->currentItemName.'_confirmation'];
@@ -447,26 +460,24 @@ class Validator {
 
 }
 
-
-/*
-
-  "accepted"         => "The :attribute must be accepted.",
-  "after"            => "The :attribute must be a date after :date.",
-  "alpha"            => "The :attribute may only contain letters.",
-  "alpha_dash"       => "The :attribute may only contain letters, numbers, and dashes.",
-  "alpha_num"        => "The :attribute may only contain letters and numbers.",
-  "before"           => "The :attribute must be a date before :date.",
-  "confirmed"        => "The :attribute confirmation does not match.",
-  "date_format"      => "The :attribute does not match the format :format.",
-  "digits"           => "The :attribute must be :digits digits.",
-  "digits_between"   => "The :attribute must be between :min and :max digits.",
-  "exists"           => "The selected :attribute is invalid.",
-  "image"            => "The :attribute must be an image.",
-  "in"               => "The selected :attribute is invalid.",
-  "ip"               => "The :attribute must be a valid IP address.",
-  "mimes"            => "The :attribute must be a file of type: :values.",
-  "not_in"           => "The selected :attribute is invalid.",
-  "regex"            => "The :attribute format is invalid.",
-  "unique"           => "The :attribute has already been taken.",
-
-*/
+/**
+ * @todo
+ * "accepted"         => "The :attribute must be accepted.",
+ * "after"            => "The :attribute must be a date after :date.",
+ * "alpha"            => "The :attribute may only contain letters.",
+ * "alpha_dash"       => "The :attribute may only contain letters, numbers, and dashes.",
+ * "alpha_num"        => "The :attribute may only contain letters and numbers.",
+ * "before"           => "The :attribute must be a date before :date.",
+ * "confirmed"        => "The :attribute confirmation does not match.",
+ * "date_format"      => "The :attribute does not match the format :format.",
+ * "digits"           => "The :attribute must be :digits digits.",
+ * "digits_between"   => "The :attribute must be between :min and :max digits.",
+ * "exists"           => "The selected :attribute is invalid.",
+ * "image"            => "The :attribute must be an image.",
+ * "in"               => "The selected :attribute is invalid.",
+ * "ip"               => "The :attribute must be a valid IP address.",
+ * "mimes"            => "The :attribute must be a file of type: :values.",
+ * "not_in"           => "The selected :attribute is invalid.",
+ * "regex"            => "The :attribute format is invalid.",
+ * "unique"           => "The :attribute has already been taken.",
+ */
