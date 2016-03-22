@@ -89,4 +89,86 @@ class ValidatorTest extends PHPUnit_Framework_TestCase
     $this->assertFalse($v->fail());
   }
 
+  public function testRequiredWithoutFail()
+  {
+    $rules = array('test2' => array('requiredWithout:test1'));
+    $input = array(
+      'test1' => '',
+      'test2' => ''
+    );
+    $v = Validator::make($input, $rules);
+    $this->assertTrue($v->fail());
+  }
+
+  public function testRequiredWithoutSuccess()
+  {
+    $rules = array('test2' => array('requiredWithout:test1'));
+    $input = array(
+      'test1' => '',
+      'test2' => 'test'
+    );
+    $v = Validator::make($input, $rules);
+    $this->assertFalse($v->fail());
+  }
+
+  public function testIntegerFail()
+  {
+    $rules = array('test' => array('integer'));
+    $input = array('test' => 'a');
+    $v = Validator::make($input, $rules);
+    $this->assertTrue($v->fail());
+  }
+
+  public function testIntegerSuccess()
+  {
+    $rules = array('test' => array('integer'));
+    $input = array('test' => 1);
+    $v = Validator::make($input, $rules);
+    $this->assertFalse($v->fail());
+  }
+
+  public function testNumericFail()
+  {
+    $rules = array('test' => array('numeric'));
+    $input = array('test' => 'a');
+    $v = Validator::make($input, $rules);
+    $this->assertTrue($v->fail());
+  }
+
+  public function testNumericSuccess()
+  {
+    $rules = array('test' => array('numeric'));
+    $input = array('test' => 1);
+    $v = Validator::make($input, $rules);
+    $this->assertFalse($v->fail());
+  }
+/*
+  public function testDateFail()
+  {
+    $rules = array(
+      'test1' => array('date'),
+      'test2' => array('date')
+    );
+    $input = array(
+      'test1' => '01-01-2000',
+      'test2' => '01/01/2000'
+    );
+    $v = Validator::make($input, $rules);
+    $this->assertTrue($v->fail());
+  }
+
+  public function testDateSuccess()
+  {
+    $rules = array(
+      'test1' => array('date'),
+      'test2' => array('date')
+    );
+    $input = array(
+      'test1' => '01-01-2000',
+      'test2' => '01/01/2000'
+    );
+    $v = Validator::make($input, $rules);
+    $this->assertFalse($v->fail());
+  }
+*
 }

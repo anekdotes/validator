@@ -1,12 +1,12 @@
 <?php
 
-/**
+/*
  * This file is part of the Validator package.
+ *
  * (c) Anekdotes Communication inc. <info@anekdotes.com>
+ *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
- *
- * @author Sébastien Roy <sebastien.roy@anekdotes.com>
  */
 
 /** namespace and use */
@@ -180,8 +180,9 @@ class Validator {
   public function date($value) {
     $formats = array("d-m-Y", "d/m/Y"); // Must add format with time...
     if ($this->required($value)) {
+      date_default_timezone_set('GMT');
       foreach ($formats as $format) {
-        $date = \Carbon::createFromFormat($format, $value);
+        $date = Carbon::createFromFormat($format, $value);
         if ($date && (date_format($date, $format) == $value)) {
           return true;
         }
