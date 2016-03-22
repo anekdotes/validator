@@ -170,5 +170,5 @@ class ValidatorTest extends PHPUnit_Framework_TestCase
     $v = Validator::make($input, $rules);
     $this->assertFalse($v->fail());
   }
-*
+*/
 }
