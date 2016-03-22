@@ -8,10 +8,10 @@
 ---
 
 A validator class to validate any type of input against any type of validation.
-	
+
 	// initate the Validator with inputs and rules
 	$validator = Validator::make($inputs, $rules);
-	
+
 	// test if validator pass all the tests
 	if($validator->fail()) {
 		// return with $validator->errors, an array of all error messages
@@ -19,7 +19,7 @@ A validator class to validate any type of input against any type of validation.
 	else {
 		// do your stuff
 	}
-	
+
 `$inputs` must be an array of all your input and `$rules` must be an array of all the rules :
 
 	$rules = array(
@@ -155,19 +155,19 @@ Check if the input has the exact length
 
 #### url
 
-Check if $value match an URL
+Check if the input match an URL
 
 	array('input' => array('url'));
 
 #### validUrl
 
-Check if $value match an URL and is valid
+Check if the input match an URL that is valid
 
 	array('input' => array('validUrl'));
 
 #### same
 
-Check if _confirmed value is the same
+Check if confirmed value is the same
 
 	array('input' => array('same:input_name'));
 
@@ -175,6 +175,6 @@ Check if _confirmed value is the same
 
 #### confirmed
 
-Check if $input_confirmation value is the same
+Check if the input_confirmation value is the same then the input
 
 	array('input' => array('confirmed'));
