@@ -13,6 +13,7 @@ namespace Tests;
 
 use Anekdotes\Validator;
 use PHPUnit_Framework_TestCase;
+use Carbon\Carbon;
 
 class ValidatorTest extends PHPUnit_Framework_TestCase
 {
@@ -142,16 +143,14 @@ class ValidatorTest extends PHPUnit_Framework_TestCase
     $v = Validator::make($input, $rules);
     $this->assertFalse($v->fail());
   }
-/*
+
   public function testDateFail()
   {
     $rules = array(
-      'test1' => array('date'),
-      'test2' => array('date')
+      'test1' => array('date')
     );
     $input = array(
-      'test1' => '01-01-2000',
-      'test2' => '01/01/2000'
+      'test1' => 'test'
     );
     $v = Validator::make($input, $rules);
     $this->assertTrue($v->fail());
@@ -160,15 +159,13 @@ class ValidatorTest extends PHPUnit_Framework_TestCase
   public function testDateSuccess()
   {
     $rules = array(
-      'test1' => array('date'),
-      'test2' => array('date')
+      'test1' => array('date')
     );
     $input = array(
-      'test1' => '01-01-2000',
-      'test2' => '01/01/2000'
+      'test1' => '1-1-2000'
     );
     $v = Validator::make($input, $rules);
     $this->assertFalse($v->fail());
   }
-*/
+
 }

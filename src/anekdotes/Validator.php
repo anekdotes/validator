@@ -171,25 +171,20 @@ class Validator {
   }
 
   /**
-   * Check if the $value is a date in supported format
-   * {"d-m-Y", "d/m/Y"}
+   * Check if the $value is a date
    *
    * @param string $value to validate
    * @return bool
    */
   public function date($value) {
-    $formats = array("d-m-Y", "d/m/Y"); // Must add format with time...
-    if ($this->required($value)) {
-      date_default_timezone_set('GMT');
-      foreach ($formats as $format) {
-        $date = Carbon::createFromFormat($format, $value);
-        if ($date && (date_format($date, $format) == $value)) {
-          return true;
-        }
-      }
+    if ($value instanceof DateTime) {
+      return true;
+    }
+    if (strtotime($value) === false) {
       return false;
     }
-    return true;
+    $date = date_parse($value);
+    return checkdate($date['month'], $date['day'], $date['year']);
   }
 
   /**
