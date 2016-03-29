@@ -66,14 +66,9 @@ Check if the input is numeric
 
 #### date
 
-Check if the input is a date in supported format
+Check if the input is a date
 
 	array('input' => array('date'))
-
-Supported format are :
-
-- d-m-Y
-- d/m/Y
 
 #### different
 
