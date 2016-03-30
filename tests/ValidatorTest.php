@@ -13,7 +13,6 @@ namespace Tests;
 
 use Anekdotes\Validator;
 use PHPUnit_Framework_TestCase;
-use Carbon\Carbon;
 
 class ValidatorTest extends PHPUnit_Framework_TestCase
 {

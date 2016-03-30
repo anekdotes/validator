@@ -11,7 +11,6 @@
 
 /** namespace and use */
 namespace Anekdotes;
-use Carbon\Carbon;
 
 /** Validator class, validate passed Input */
 class Validator {
