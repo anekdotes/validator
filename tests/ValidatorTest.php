@@ -16,155 +16,153 @@ use PHPUnit_Framework_TestCase;
 
 class ValidatorTest extends PHPUnit_Framework_TestCase
 {
+    public function testIfValidatorCanBeCreated()
+    {
+        $v = new Validator();
+        $this->assertInstanceOf('Anekdotes\Validator', $v, "Validator not instance of 'Anekdotes\Validator'");
+    }
 
-  public function testIfValidatorCanBeCreated()
-  {
-    $v = new Validator();
-    $this->assertInstanceOf('Anekdotes\Validator', $v, "Validator not instance of 'Anekdotes\Validator'");
-  }
+    public function testIfCanMake()
+    {
+        $v = Validator::make([], []);
+        $this->assertInstanceOf('Anekdotes\Validator', $v, "Validator::make not instance of 'Anekdotes\Validator'");
+    }
 
-  public function testIfCanMake()
-  {
-    $v = Validator::make(array(),array());
-    $this->assertInstanceOf('Anekdotes\Validator', $v, "Validator::make not instance of 'Anekdotes\Validator'");
-  }
+    public function testIsRequiredFail()
+    {
+        $rules = ['test' => ['required']];
+        $input = ['test' => ''];
+        $v = Validator::make($input, $rules);
+        $this->assertTrue($v->fail());
+    }
 
-  public function testIsRequiredFail()
-  {
-    $rules = array('test' => array('required'));
-    $input = array('test' => '');
-    $v = Validator::make($input, $rules);
-    $this->assertTrue($v->fail());
-  }
+    public function testIsRequiredSuccess()
+    {
+        $rules = ['test' => ['required']];
+        $input = ['test' => 'test'];
+        $v = Validator::make($input, $rules);
+        $this->assertFalse($v->fail());
+    }
 
-  public function testIsRequiredSuccess()
-  {
-    $rules = array('test' => array('required'));
-    $input = array('test' => 'test');
-    $v = Validator::make($input, $rules);
-    $this->assertFalse($v->fail());
-  }
-
-  public function testRequiredIfFail()
-  {
-    $rules = array('test2' => array('requiredIf:test1,test'));
-    $input = array(
+    public function testRequiredIfFail()
+    {
+        $rules = ['test2' => ['requiredIf:test1,test']];
+        $input = [
       'test1' => 'test',
-      'test2' => ''
-    );
-    $v = Validator::make($input, $rules);
-    $this->assertTrue($v->fail());
-  }
+      'test2' => '',
+    ];
+        $v = Validator::make($input, $rules);
+        $this->assertTrue($v->fail());
+    }
 
-  public function testRequiredIfSuccess()
-  {
-    $rules = array('test2' => array('requiredIf:test1,test'));
-    $input = array(
+    public function testRequiredIfSuccess()
+    {
+        $rules = ['test2' => ['requiredIf:test1,test']];
+        $input = [
       'test1' => 'test',
-      'test2' => 'test'
-    );
-    $v = Validator::make($input, $rules);
-    $this->assertFalse($v->fail());
-  }
+      'test2' => 'test',
+    ];
+        $v = Validator::make($input, $rules);
+        $this->assertFalse($v->fail());
+    }
 
-  public function testRequiredWithFail()
-  {
-    $rules = array('test2' => array('requiredWith:test1'));
-    $input = array(
+    public function testRequiredWithFail()
+    {
+        $rules = ['test2' => ['requiredWith:test1']];
+        $input = [
       'test1' => 'test',
-      'test2' => ''
-    );
-    $v = Validator::make($input, $rules);
-    $this->assertTrue($v->fail());
-  }
+      'test2' => '',
+    ];
+        $v = Validator::make($input, $rules);
+        $this->assertTrue($v->fail());
+    }
 
-  public function testRequiredWithSuccess()
-  {
-    $rules = array('test2' => array('requiredWith:test1'));
-    $input = array(
+    public function testRequiredWithSuccess()
+    {
+        $rules = ['test2' => ['requiredWith:test1']];
+        $input = [
       'test1' => 'test',
-      'test2' => 'test'
-    );
-    $v = Validator::make($input, $rules);
-    $this->assertFalse($v->fail());
-  }
+      'test2' => 'test',
+    ];
+        $v = Validator::make($input, $rules);
+        $this->assertFalse($v->fail());
+    }
 
-  public function testRequiredWithoutFail()
-  {
-    $rules = array('test2' => array('requiredWithout:test1'));
-    $input = array(
+    public function testRequiredWithoutFail()
+    {
+        $rules = ['test2' => ['requiredWithout:test1']];
+        $input = [
       'test1' => '',
-      'test2' => ''
-    );
-    $v = Validator::make($input, $rules);
-    $this->assertTrue($v->fail());
-  }
+      'test2' => '',
+    ];
+        $v = Validator::make($input, $rules);
+        $this->assertTrue($v->fail());
+    }
 
-  public function testRequiredWithoutSuccess()
-  {
-    $rules = array('test2' => array('requiredWithout:test1'));
-    $input = array(
+    public function testRequiredWithoutSuccess()
+    {
+        $rules = ['test2' => ['requiredWithout:test1']];
+        $input = [
       'test1' => '',
-      'test2' => 'test'
-    );
-    $v = Validator::make($input, $rules);
-    $this->assertFalse($v->fail());
-  }
+      'test2' => 'test',
+    ];
+        $v = Validator::make($input, $rules);
+        $this->assertFalse($v->fail());
+    }
 
-  public function testIntegerFail()
-  {
-    $rules = array('test' => array('integer'));
-    $input = array('test' => 'a');
-    $v = Validator::make($input, $rules);
-    $this->assertTrue($v->fail());
-  }
+    public function testIntegerFail()
+    {
+        $rules = ['test' => ['integer']];
+        $input = ['test' => 'a'];
+        $v = Validator::make($input, $rules);
+        $this->assertTrue($v->fail());
+    }
 
-  public function testIntegerSuccess()
-  {
-    $rules = array('test' => array('integer'));
-    $input = array('test' => 1);
-    $v = Validator::make($input, $rules);
-    $this->assertFalse($v->fail());
-  }
+    public function testIntegerSuccess()
+    {
+        $rules = ['test' => ['integer']];
+        $input = ['test' => 1];
+        $v = Validator::make($input, $rules);
+        $this->assertFalse($v->fail());
+    }
 
-  public function testNumericFail()
-  {
-    $rules = array('test' => array('numeric'));
-    $input = array('test' => 'a');
-    $v = Validator::make($input, $rules);
-    $this->assertTrue($v->fail());
-  }
+    public function testNumericFail()
+    {
+        $rules = ['test' => ['numeric']];
+        $input = ['test' => 'a'];
+        $v = Validator::make($input, $rules);
+        $this->assertTrue($v->fail());
+    }
 
-  public function testNumericSuccess()
-  {
-    $rules = array('test' => array('numeric'));
-    $input = array('test' => 1);
-    $v = Validator::make($input, $rules);
-    $this->assertFalse($v->fail());
-  }
+    public function testNumericSuccess()
+    {
+        $rules = ['test' => ['numeric']];
+        $input = ['test' => 1];
+        $v = Validator::make($input, $rules);
+        $this->assertFalse($v->fail());
+    }
 
-  public function testDateFail()
-  {
-    $rules = array(
-      'test1' => array('date')
-    );
-    $input = array(
-      'test1' => 'test'
-    );
-    $v = Validator::make($input, $rules);
-    $this->assertTrue($v->fail());
-  }
+    public function testDateFail()
+    {
+        $rules = [
+      'test1' => ['date'],
+    ];
+        $input = [
+      'test1' => 'test',
+    ];
+        $v = Validator::make($input, $rules);
+        $this->assertTrue($v->fail());
+    }
 
-  public function testDateSuccess()
-  {
-    $rules = array(
-      'test1' => array('date')
-    );
-    $input = array(
-      'test1' => '1-1-2000'
-    );
-    $v = Validator::make($input, $rules);
-    $this->assertFalse($v->fail());
-  }
-
+    public function testDateSuccess()
+    {
+        $rules = [
+      'test1' => ['date'],
+    ];
+        $input = [
+      'test1' => '1-1-2000',
+    ];
+        $v = Validator::make($input, $rules);
+        $this->assertFalse($v->fail());
+    }
 }
