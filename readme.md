@@ -2,10 +2,11 @@
 
 [![Latest Stable Version](https://poser.pugx.org/anekdotes/validator/v/stable)](https://packagist.org/packages/anekdotes/validator)
 [![Build Status](https://travis-ci.org/anekdotes/validator.svg?branch=master)](https://travis-ci.org/anekdotes/validator)
-[![License](https://poser.pugx.org/anekdotes/validator/license)](https://packagist.org/packages/anekdotes/validator)
-[![Total Downloads](https://poser.pugx.org/anekdotes/validator/downloads)](https://packagist.org/packages/anekdotes/validator)
 [![codecov.io](https://codecov.io/github/anekdotes/validator/coverage.svg?branch=master)](https://codecov.io/github/anekdotes/validator?branch=master)
 [![StyleCI](https://styleci.io/repos/53698668/shield?style=flat)](https://styleci.io/repos/53698668)
+[![License](https://poser.pugx.org/anekdotes/validator/license)](https://packagist.org/packages/anekdotes/validator)
+[![Total Downloads](https://poser.pugx.org/anekdotes/validator/downloads)](https://packagist.org/packages/anekdotes/validator)
+
 
 ---
 

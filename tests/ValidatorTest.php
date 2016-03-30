@@ -48,9 +48,9 @@ class ValidatorTest extends PHPUnit_Framework_TestCase
     {
         $rules = ['test2' => ['requiredIf:test1,test']];
         $input = [
-      'test1' => 'test',
-      'test2' => '',
-    ];
+            'test1' => 'test',
+            'test2' => '',
+        ];
         $v = Validator::make($input, $rules);
         $this->assertTrue($v->fail());
     }
@@ -59,9 +59,9 @@ class ValidatorTest extends PHPUnit_Framework_TestCase
     {
         $rules = ['test2' => ['requiredIf:test1,test']];
         $input = [
-      'test1' => 'test',
-      'test2' => 'test',
-    ];
+            'test1' => 'test',
+            'test2' => 'test',
+        ];
         $v = Validator::make($input, $rules);
         $this->assertFalse($v->fail());
     }
@@ -70,9 +70,9 @@ class ValidatorTest extends PHPUnit_Framework_TestCase
     {
         $rules = ['test2' => ['requiredWith:test1']];
         $input = [
-      'test1' => 'test',
-      'test2' => '',
-    ];
+            'test1' => 'test',
+            'test2' => '',
+        ];
         $v = Validator::make($input, $rules);
         $this->assertTrue($v->fail());
     }
@@ -81,9 +81,9 @@ class ValidatorTest extends PHPUnit_Framework_TestCase
     {
         $rules = ['test2' => ['requiredWith:test1']];
         $input = [
-      'test1' => 'test',
-      'test2' => 'test',
-    ];
+            'test1' => 'test',
+            'test2' => 'test',
+        ];
         $v = Validator::make($input, $rules);
         $this->assertFalse($v->fail());
     }
@@ -92,9 +92,9 @@ class ValidatorTest extends PHPUnit_Framework_TestCase
     {
         $rules = ['test2' => ['requiredWithout:test1']];
         $input = [
-      'test1' => '',
-      'test2' => '',
-    ];
+            'test1' => '',
+            'test2' => '',
+        ];
         $v = Validator::make($input, $rules);
         $this->assertTrue($v->fail());
     }
@@ -103,9 +103,9 @@ class ValidatorTest extends PHPUnit_Framework_TestCase
     {
         $rules = ['test2' => ['requiredWithout:test1']];
         $input = [
-      'test1' => '',
-      'test2' => 'test',
-    ];
+            'test1' => '',
+            'test2' => 'test',
+        ];
         $v = Validator::make($input, $rules);
         $this->assertFalse($v->fail());
     }
@@ -145,11 +145,11 @@ class ValidatorTest extends PHPUnit_Framework_TestCase
     public function testDateFail()
     {
         $rules = [
-      'test1' => ['date'],
-    ];
+            'test1' => ['date'],
+        ];
         $input = [
-      'test1' => 'test',
-    ];
+            'test1' => 'test',
+        ];
         $v = Validator::make($input, $rules);
         $this->assertTrue($v->fail());
     }
@@ -157,11 +157,11 @@ class ValidatorTest extends PHPUnit_Framework_TestCase
     public function testDateSuccess()
     {
         $rules = [
-      'test1' => ['date'],
-    ];
+            'test1' => ['date'],
+        ];
         $input = [
-      'test1' => '1-1-2000',
-    ];
+            'test1' => '1-1-2000',
+        ];
         $v = Validator::make($input, $rules);
         $this->assertFalse($v->fail());
     }
