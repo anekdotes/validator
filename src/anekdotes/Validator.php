@@ -28,15 +28,15 @@ class Validator
     public $errors = [];
 
     /**
-    * Validator make method.
-    *
-    * @source
-    *
-    * @param array $items to validate
-    * @param array $rules to validate with
-    *
-    * @return object
-    */
+     * Validator make method.
+     *
+     * @source
+     *
+     * @param array $items to validate
+     * @param array $rules to validate with
+     *
+     * @return object
+     */
     public static function make($items, $rules)
     {
         $validator = new self();
@@ -47,51 +47,51 @@ class Validator
     }
 
     /**
-    * fail return true if any value fail the validation.
-    *
-    * @return bool
-    */
+     * fail return true if any value fail the validation.
+     *
+     * @return bool
+     */
     public function fail()
     {
         $mergedParams = [];
 
         foreach ($this->rules as $itemName => $ruleNames) {
-          foreach ($ruleNames as $rule) {
-              $ruleParams = explode(':', $rule);
-              $rule = $ruleParams[0];
-              array_splice($ruleParams, 0, 1);
+            foreach ($ruleNames as $rule) {
+                $ruleParams = explode(':', $rule);
+                $rule = $ruleParams[0];
+                array_splice($ruleParams, 0, 1);
 
-              if (array_key_exists($itemName, $this->items)) {
-                  $mergedParams[] = $this->items[$itemName];
+                if (array_key_exists($itemName, $this->items)) {
+                    $mergedParams[] = $this->items[$itemName];
 
-                  if (count($ruleParams) > 0) {
-                      $ruleParams = explode(',', $ruleParams[0]);
-                      $mergedParams = array_merge($mergedParams, $ruleParams);
-                  }
+                    if (count($ruleParams) > 0) {
+                        $ruleParams = explode(',', $ruleParams[0]);
+                        $mergedParams = array_merge($mergedParams, $ruleParams);
+                    }
 
-                  $this->currentItemName = $itemName;
-                  if (!call_user_func_array([$this, $rule], $mergedParams)) {
-                      $this->errors[$itemName] = $itemName.' is not '.$rule;
-                  }
-                  $this->currentItemName = null;
+                    $this->currentItemName = $itemName;
+                    if (!call_user_func_array([$this, $rule], $mergedParams)) {
+                        $this->errors[$itemName] = $itemName.' is not '.$rule;
+                    }
+                    $this->currentItemName = null;
 
-                  array_splice($mergedParams, 0, count($mergedParams));
-              } else {
-                  $this->errors[$itemName] = $itemName.' is not found ';
-              }
-          }
+                    array_splice($mergedParams, 0, count($mergedParams));
+                } else {
+                    $this->errors[$itemName] = $itemName.' is not found ';
+                }
+            }
         }
 
         return count($this->errors) > 0 ? true : false;
     }
 
     /**
-    * Check if $value is empty.
-    *
-    * @param mixed[] $value value to validate
-    *
-    * @return bool
-    */
+     * Check if $value is empty.
+     *
+     * @param mixed[] $value value to validate
+     *
+     * @return bool
+     */
     public function required($value)
     {
         if (is_array($value)) {
@@ -102,15 +102,15 @@ class Validator
     }
 
     /**
-    * Check if $value is empty if
-    * $itemValue has $condition value.
-    *
-    * @param mixed[] $value to validate
-    * @param mixed[] $item value to check
-    * @param mixed[] $condition to respect
-    *
-    * @return bool
-    */
+     * Check if $value is empty if
+     * $itemValue has $condition value.
+     *
+     * @param mixed[] $value     to validate
+     * @param mixed[] $item      value to check
+     * @param mixed[] $condition to respect
+     *
+     * @return bool
+     */
     public function requiredIf($value, $item, $condition)
     {
         return $this->items[$item] == $condition ?
@@ -119,14 +119,14 @@ class Validator
     }
 
     /**
-    * Check if $value is empty if
-    * $itemValue is not empty.
-    *
-    * @param mixed[] $value to validate
-    * @param mixed[] $item value to check
-    *
-    * @return bool
-    */
+     * Check if $value is empty if
+     * $itemValue is not empty.
+     *
+     * @param mixed[] $value to validate
+     * @param mixed[] $item  value to check
+     *
+     * @return bool
+     */
     public function requiredWith($value, $item)
     {
         return $this->required($this->items[$item]) ?
@@ -135,14 +135,14 @@ class Validator
     }
 
     /**
-    * Check if $value is empty if
-    * $itemValue is empty.
-    *
-    * @param mixed[] $value to validate
-    * @param mixed[] $item value to check
-    *
-    * @return bool
-    */
+     * Check if $value is empty if
+     * $itemValue is empty.
+     *
+     * @param mixed[] $value to validate
+     * @param mixed[] $item  value to check
+     *
+     * @return bool
+     */
     public function requiredWithout($value, $item)
     {
         return $this->required($this->items[$item]) ?
@@ -151,36 +151,36 @@ class Validator
     }
 
     /**
-    * Check if the $value is an integer.
-    *
-    * @param mixed[] $value to validate
-    *
-    * @return bool
-    */
+     * Check if the $value is an integer.
+     *
+     * @param mixed[] $value to validate
+     *
+     * @return bool
+     */
     public function integer($value)
     {
         return $this->required($value) ? is_int($value) : true;
     }
 
     /**
-    * Check if the $value is numeric.
-    *
-    * @param mixed[] $value to validate
-    *
-    * @return bool
-    */
+     * Check if the $value is numeric.
+     *
+     * @param mixed[] $value to validate
+     *
+     * @return bool
+     */
     public function numeric($value)
     {
         return $this->required($value) ? is_numeric($value) : true;
     }
 
     /**
-    * Check if the $value is a date.
-    *
-    * @param string $value to validate
-    *
-    * @return bool
-    */
+     * Check if the $value is a date.
+     *
+     * @param string $value to validate
+     *
+     * @return bool
+     */
     public function date($value)
     {
         if ($value instanceof DateTime) {
@@ -195,13 +195,13 @@ class Validator
     }
 
     /**
-    * Check if the $value is different then
-    * $params.
-    *
-    * @param array {value to vidate, n value to compare}
-    *
-    * @return bool
-    */
+     * Check if the $value is different then
+     * $params.
+     *
+     * @param array {value to vidate, n value to compare}
+     *
+     * @return bool
+     */
     public function different()
     {
         $params = func_get_args();
@@ -219,12 +219,12 @@ class Validator
     }
 
     /**
-    * Check if the $value match a email.
-    *
-    * @param string $value to validate
-    *
-    * @return bool
-    */
+     * Check if the $value match a email.
+     *
+     * @param string $value to validate
+     *
+     * @return bool
+     */
     public function email($value)
     {
         return $this->required($value) ?
@@ -233,12 +233,12 @@ class Validator
     }
 
     /**
-    * Check if the $value match a postal code.
-    *
-    * @param string $value to validate
-    *
-    * @return bool
-    */
+     * Check if the $value match a postal code.
+     *
+     * @param string $value to validate
+     *
+     * @return bool
+     */
     public function postalCode($value)
     {
         return $this->required($value) ?
@@ -250,12 +250,12 @@ class Validator
     }
 
     /**
-    * Check if the $value match a phone number.
-    *
-    * @param string $value to validate
-    *
-    * @return bool
-    */
+     * Check if the $value match a phone number.
+     *
+     * @param string $value to validate
+     *
+     * @return bool
+     */
     public function phoneNumber($value)
     {
         $value = preg_replace("/[^\d]+/", '', $value);
@@ -266,18 +266,18 @@ class Validator
     }
 
     /**
-    * Check if the $value is between $min and $max
-    * You can put
-    * string : test string length
-    * number : test number size
-    * file : test file size in kilobytes.
-    *
-    * @param mixed[] $value or number or file
-    * @param numeric $min size to check
-    * @param numeric $max size to check
-    *
-    * @return bool
-    */
+     * Check if the $value is between $min and $max
+     * You can put
+     * string : test string length
+     * number : test number size
+     * file : test file size in kilobytes.
+     *
+     * @param mixed[] $value or number or file
+     * @param numeric $min   size to check
+     * @param numeric $max   size to check
+     *
+     * @return bool
+     */
     public function between($value, $min, $max)
     {
         if ($this->required($value)) {
@@ -304,17 +304,17 @@ class Validator
     }
 
     /**
-    * Check if the $value is under $min
-    * You can put
-    * string : test string length
-    * number : test number size
-    * file : test file size in kilobytes.
-    *
-    * @param mixed[] $value or number or file
-    * @param numeric $min size to check
-    *
-    * @return bool
-    */
+     * Check if the $value is under $min
+     * You can put
+     * string : test string length
+     * number : test number size
+     * file : test file size in kilobytes.
+     *
+     * @param mixed[] $value or number or file
+     * @param numeric $min   size to check
+     *
+     * @return bool
+     */
     public function minimum($value, $min)
     {
         if ($this->required($value)) {
@@ -341,17 +341,17 @@ class Validator
     }
 
     /**
-    * Check if the $value is over $max
-    * You can put
-    * string : test string length
-    * number : test number size
-    * file : test file size in kilobytes.
-    *
-    * @param mixed[] $value or number or file
-    * @param numeric $max size to check
-    *
-    * @return bool
-    */
+     * Check if the $value is over $max
+     * You can put
+     * string : test string length
+     * number : test number size
+     * file : test file size in kilobytes.
+     *
+     * @param mixed[] $value or number or file
+     * @param numeric $max   size to check
+     *
+     * @return bool
+     */
     public function maximum($value, $max)
     {
         if ($this->required($value)) {
@@ -378,17 +378,17 @@ class Validator
     }
 
     /**
-    * Check if the $value is exactly $size
-    * You can put
-    * string : test string length
-    * number : test number size
-    * file : test file size in kilobytes.
-    *
-    * @param mixed[] $value or number or file
-    * @param numeric $size size to check
-    *
-    * @return bool
-    */
+     * Check if the $value is exactly $size
+     * You can put
+     * string : test string length
+     * number : test number size
+     * file : test file size in kilobytes.
+     *
+     * @param mixed[] $value or number or file
+     * @param numeric $size  size to check
+     *
+     * @return bool
+     */
     public function size($value, $size)
     {
         if ($this->required($value)) {
@@ -419,25 +419,25 @@ class Validator
     }
 
     /**
-    * Check if the $value is exactly $length.
-    *
-    * @param mixed[] $value or number
-    * @param numeric $length length
-    *
-    * @return bool
-    */
+     * Check if the $value is exactly $length.
+     *
+     * @param mixed[] $value  or number
+     * @param numeric $length length
+     *
+     * @return bool
+     */
     public function length($value, $length)
     {
         return strlen($value) == $length ? true : false;
     }
 
     /**
-    * Check if $value match an URL..
-    *
-    * @param string $value to check
-    *
-    * @return bool
-    */
+     * Check if $value match an URL..
+     *
+     * @param string $value to check
+     *
+     * @return bool
+     */
     public function url($value)
     {
         return $this->required($value) ?
@@ -454,12 +454,12 @@ class Validator
     }
 
     /**
-    * Check if $value match an URL and is valid.
-    *
-    * @param string $value to check
-    *
-    * @return bool
-    */
+     * Check if $value match an URL and is valid.
+     *
+     * @param string $value to check
+     *
+     * @return bool
+     */
     public function validUrl($value)
     {
         return $this->required($value) ?
@@ -468,30 +468,29 @@ class Validator
     }
 
     /**
-    * Check if _confirmed value is the same.
-    *
-    * @param string $value tu check
-    * @param string $item to confirm
-    *
-    * @return bool
-    */
+     * Check if _confirmed value is the same.
+     *
+     * @param string $value tu check
+     * @param string $item  to confirm
+     *
+     * @return bool
+     */
     public function same($value, $item)
     {
         return $value === $this->items[$item];
     }
 
     /**
-    * Check if $item_confirmation value is the same.
-    *
-    * @param string $value tu check
-    *
-    * @return bool
-    */
+     * Check if $item_confirmation value is the same.
+     *
+     * @param string $value tu check
+     *
+     * @return bool
+     */
     public function confirmed($value)
     {
         return $value === $this->items[$this->currentItemName.'_confirmation'];
     }
-
 }
 
 /*
