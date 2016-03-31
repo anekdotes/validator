@@ -12,9 +12,9 @@
 namespace Tests;
 
 use Anekdotes\Validator;
-use PHPUnit_Framework_TestCase;
-use DateTimezone;
 use DateTime;
+use DateTimezone;
+use PHPUnit_Framework_TestCase;
 
 class ValidatorTest extends PHPUnit_Framework_TestCase
 {
