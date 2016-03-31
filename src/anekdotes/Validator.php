@@ -495,7 +495,7 @@ class Validator
         return $value === $this->items[$this->currentItemName.'_confirmation'];
     }
 
-    /**
+    /*
      * @todo
      * "accepted"         => "The :attribute must be accepted.",
      * "after"            => "The :attribute must be a date after :date.",
