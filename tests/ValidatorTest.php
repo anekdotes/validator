@@ -28,7 +28,7 @@ class ValidatorTest extends PHPUnit_Framework_TestCase
         $this->assertInstanceOf('Anekdotes\Validator', $v, "Validator::make not instance of 'Anekdotes\Validator'");
     }
 
-    public function testIsRequiredFail()
+    public function testIsRequiredStringFail()
     {
         $rules = ['test' => ['required']];
         $input = ['test' => ''];
@@ -36,10 +36,26 @@ class ValidatorTest extends PHPUnit_Framework_TestCase
         $this->assertTrue($v->fail());
     }
 
-    public function testIsRequiredSuccess()
+    public function testIsRequiredStringSuccess()
     {
         $rules = ['test' => ['required']];
         $input = ['test' => 'test'];
+        $v = Validator::make($input, $rules);
+        $this->assertFalse($v->fail());
+    }
+
+    public function testIsRequiredArrayFail()
+    {
+        $rules = ['test' => ['required']];
+        $input = ['test' => []];
+        $v = Validator::make($input, $rules);
+        $this->assertTrue($v->fail());
+    }
+
+    public function testIsRequiredArraySuccess()
+    {
+        $rules = ['test' => ['required']];
+        $input = ['test' => ['test']];
         $v = Validator::make($input, $rules);
         $this->assertFalse($v->fail());
     }
@@ -142,7 +158,7 @@ class ValidatorTest extends PHPUnit_Framework_TestCase
         $this->assertFalse($v->fail());
     }
 
-    public function testDateFail()
+    public function testDateStringFail()
     {
         $rules = [
             'test1' => ['date'],
@@ -154,13 +170,25 @@ class ValidatorTest extends PHPUnit_Framework_TestCase
         $this->assertTrue($v->fail());
     }
 
-    public function testDateSuccess()
+    public function testDateStringSuccess()
     {
         $rules = [
             'test1' => ['date'],
         ];
         $input = [
             'test1' => '1-1-2000',
+        ];
+        $v = Validator::make($input, $rules);
+        $this->assertFalse($v->fail());
+    }
+
+    public function testDateDateTimeSuccess()
+    {
+        $rules = [
+            'test1' => ['date'],
+        ];
+        $input = [
+            'test1' => new Date,
         ];
         $v = Validator::make($input, $rules);
         $this->assertFalse($v->fail());
