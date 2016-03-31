@@ -13,6 +13,8 @@ namespace Tests;
 
 use Anekdotes\Validator;
 use PHPUnit_Framework_TestCase;
+use DateTimezone;
+use DateTime;
 
 class ValidatorTest extends PHPUnit_Framework_TestCase
 {
@@ -160,37 +162,29 @@ class ValidatorTest extends PHPUnit_Framework_TestCase
 
     public function testDateStringFail()
     {
-        $rules = [
-            'test1' => ['date'],
-        ];
-        $input = [
-            'test1' => 'test',
-        ];
+        $rules = ['test1' => ['date']];
+        $input = ['test1' => 'test'];
         $v = Validator::make($input, $rules);
         $this->assertTrue($v->fail());
     }
 
     public function testDateStringSuccess()
     {
-        $rules = [
-            'test1' => ['date'],
-        ];
-        $input = [
-            'test1' => '1-1-2000',
-        ];
+        $rules = ['test1' => ['date']];
+        $input = ['test1' => '1-1-2000'];
         $v = Validator::make($input, $rules);
         $this->assertFalse($v->fail());
     }
 
+    /*
     public function testDateDateTimeSuccess()
     {
-        $rules = [
-            'test1' => ['date'],
-        ];
-        $input = [
-            'test1' => new Date,
-        ];
+        $rules = ['test1' => ['date']];
+        $tz = 'America/New_York';
+        $otz = new DateTimeZone($tz);
+        $input = ['test1' => new DateTime("2000-01-01 $tz", $otz)];
         $v = Validator::make($input, $rules);
         $this->assertFalse($v->fail());
     }
+    */
 }

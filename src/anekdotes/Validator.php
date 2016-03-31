@@ -183,9 +183,12 @@ class Validator
      */
     public function date($value)
     {
-        if ($value instanceof DateTime) {
-            return true;
-        }
+        /**
+         * @todo
+         * if ($value instanceof DateTime) {
+         *     return true;
+         * }
+         */
         if (strtotime($value) === false) {
             return false;
         }
@@ -493,7 +496,7 @@ class Validator
     }
 }
 
-/*
+/**
  * @todo
  * "accepted"         => "The :attribute must be accepted.",
  * "after"            => "The :attribute must be a date after :date.",
