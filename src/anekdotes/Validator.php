@@ -494,26 +494,26 @@ class Validator
     {
         return $value === $this->items[$this->currentItemName.'_confirmation'];
     }
-}
 
-/**
- * @todo
- * "accepted"         => "The :attribute must be accepted.",
- * "after"            => "The :attribute must be a date after :date.",
- * "alpha"            => "The :attribute may only contain letters.",
- * "alpha_dash"       => "The :attribute may only contain letters, numbers, and dashes.",
- * "alpha_num"        => "The :attribute may only contain letters and numbers.",
- * "before"           => "The :attribute must be a date before :date.",
- * "confirmed"        => "The :attribute confirmation does not match.",
- * "date_format"      => "The :attribute does not match the format :format.",
- * "digits"           => "The :attribute must be :digits digits.",
- * "digits_between"   => "The :attribute must be between :min and :max digits.",
- * "exists"           => "The selected :attribute is invalid.",
- * "image"            => "The :attribute must be an image.",
- * "in"               => "The selected :attribute is invalid.",
- * "ip"               => "The :attribute must be a valid IP address.",
- * "mimes"            => "The :attribute must be a file of type: :values.",
- * "not_in"           => "The selected :attribute is invalid.",
- * "regex"            => "The :attribute format is invalid.",
- * "unique"           => "The :attribute has already been taken.",
- */
+    /**
+     * @todo
+     * "accepted"         => "The :attribute must be accepted.",
+     * "after"            => "The :attribute must be a date after :date.",
+     * "alpha"            => "The :attribute may only contain letters.",
+     * "alpha_dash"       => "The :attribute may only contain letters, numbers, and dashes.",
+     * "alpha_num"        => "The :attribute may only contain letters and numbers.",
+     * "before"           => "The :attribute must be a date before :date.",
+     * "confirmed"        => "The :attribute confirmation does not match.",
+     * "date_format"      => "The :attribute does not match the format :format.",
+     * "digits"           => "The :attribute must be :digits digits.",
+     * "digits_between"   => "The :attribute must be between :min and :max digits.",
+     * "exists"           => "The selected :attribute is invalid.",
+     * "image"            => "The :attribute must be an image.",
+     * "in"               => "The selected :attribute is invalid.",
+     * "ip"               => "The :attribute must be a valid IP address.",
+     * "mimes"            => "The :attribute must be a file of type: :values.",
+     * "not_in"           => "The selected :attribute is invalid.",
+     * "regex"            => "The :attribute format is invalid.",
+     * "unique"           => "The :attribute has already been taken.",
+     */
+}
