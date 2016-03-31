@@ -496,7 +496,7 @@ class Validator
     }
 }
 
-/**
+/*
  * @todo
  * "accepted"         => "The :attribute must be accepted.",
  * "after"            => "The :attribute must be a date after :date.",
