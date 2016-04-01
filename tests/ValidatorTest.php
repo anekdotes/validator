@@ -174,15 +174,68 @@ class ValidatorTest extends PHPUnit_Framework_TestCase
         $this->assertFalse($v->fail());
     }
 
-    /*
-    public function testDateDateTimeSuccess()
+    public function testDifferentFail()
     {
-        $rules = ['test1' => ['date']];
-        $tz = 'America/New_York';
-        $otz = new DateTimeZone($tz);
-        $input = ['test1' => new DateTime("2000-01-01 $tz", $otz)];
+        $rules = ['test1' => ['different:allo']];
+        $input = ['test1' => 'allo'];
+        $v = Validator::make($input, $rules);
+        $this->assertTrue($v->fail());
+    }
+
+    public function testDifferentSuccess()
+    {
+        $rules = ['test1' => ['different:salut']];
+        $input = ['test1' => 'allo'];
         $v = Validator::make($input, $rules);
         $this->assertFalse($v->fail());
     }
-    */
+
+    public function testEmailFail()
+    {
+        $rules = ['test1' => ['email']];
+        $input = ['test1' => 'allo'];
+        $v = Validator::make($input, $rules);
+        $this->assertTrue($v->fail());
+    }
+
+    public function testEmailSuccess()
+    {
+        $rules = ['test1' => ['email']];
+        $input = ['test1' => 'test@test.com'];
+        $v = Validator::make($input, $rules);
+        $this->assertFalse($v->fail());
+    }
+
+    public function testPostalCodeFail()
+    {
+        $rules = ['test1' => ['postalCode']];
+        $input = ['test1' => 'allo'];
+        $v = Validator::make($input, $rules);
+        $this->assertTrue($v->fail());
+    }
+
+    public function testPostalCodeSuccess()
+    {
+        $rules = ['test1' => ['postalCode']];
+        $input = ['test1' => 'J4J4W4'];
+        $v = Validator::make($input, $rules);
+        $this->assertFalse($v->fail());
+    }
+
+    public function testPhoneNumberFail()
+    {
+        $rules = ['test1' => ['phoneNumber']];
+        $input = ['test1' => '121'];
+        $v = Validator::make($input, $rules);
+        $this->assertTrue($v->fail());
+    }
+
+    public function testPhoneNumberSuccess()
+    {
+        $rules = ['test1' => ['phoneNumber']];
+        $input = ['test1' => '123-123-1234'];
+        $v = Validator::make($input, $rules);
+        $this->assertFalse($v->fail());
+    }
+
 }
