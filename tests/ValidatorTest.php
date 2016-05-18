@@ -254,7 +254,7 @@ class ValidatorTest extends PHPUnit_Framework_TestCase
           'type'     => 'image/png',
           'tmp_name' => '/test/files/test.png',
           'error'    => 0,
-          'size'     => 7734
+          'size'     => 7734,
         ]];
         $v = Validator::make($input, $rules);
         $this->assertTrue($v->fail());
@@ -276,7 +276,7 @@ class ValidatorTest extends PHPUnit_Framework_TestCase
           'type'     => 'image/png',
           'tmp_name' => '/test/files/test.png',
           'error'    => 0,
-          'size'     => 7734
+          'size'     => 7734,
         ]];
         $v = Validator::make($input, $rules);
         $this->assertTrue($v->fail());
