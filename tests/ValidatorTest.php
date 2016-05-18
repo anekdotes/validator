@@ -237,4 +237,49 @@ class ValidatorTest extends PHPUnit_Framework_TestCase
         $v = Validator::make($input, $rules);
         $this->assertFalse($v->fail());
     }
+
+    public function testBetweenFail()
+    {
+        $rules = ['test1' => ['between:1,3']];
+        $input = ['test1' => 1];
+        $v = Validator::make($input, $rules);
+        $this->assertTrue($v->fail());
+        $rules = ['test1' => ['between:1,3']];
+        $input = ['test1' => 'hello'];
+        $v = Validator::make($input, $rules);
+        $this->assertTrue($v->fail());
+        $rules = ['test1' => ['between:1,6']];
+        $input = ['test1' => [
+          'name' => 'test.png',
+          'type' => 'image/png',
+          'tmp_name' => '/test/files/test.png',
+          'error' => 0,
+          'size' => 7734
+        ]];
+        $v = Validator::make($input, $rules);
+        $this->assertTrue($v->fail());
+    }
+
+    public function testBetweenSuccess()
+    {
+        $rules = ['test1' => ['between:1,3']];
+        $input = ['test1' => 2];
+        $v = Validator::make($input, $rules);
+        $this->assertFalse($v->fail());
+        $rules = ['test1' => ['between:1,3']];
+        $input = ['test1' => 'hi'];
+        $v = Validator::make($input, $rules);
+        $this->assertFalse($v->fail());
+        $rules = ['test1' => ['between:4,8']];
+        $input = ['test1' => [
+          'name' => 'test.png',
+          'type' => 'image/png',
+          'tmp_name' => '/test/files/test.png',
+          'error' => 0,
+          'size' => 7734
+        ]];
+        $v = Validator::make($input, $rules);
+        $this->assertTrue($v->fail());
+    }
+
 }

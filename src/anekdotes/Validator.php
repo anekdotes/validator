@@ -293,7 +293,7 @@ class Validator
                 if (strlen($value) > $min & strlen($value) < $max) {
                     return true;
                 }
-            } elseif (is_file($value)) {
+            } elseif (is_file($value['tmp_name'])) {
                 $fileSize = ($value['size'] / 1024);
                 if ($fileSize > $min & $fileSize < $max) {
                     return true;
