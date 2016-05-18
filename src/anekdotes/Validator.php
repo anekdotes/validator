@@ -323,16 +323,16 @@ class Validator
         if ($this->required($value)) {
             // is_numeric or is_integer ?
             if (is_numeric($value)) {
-                if ($value > $min) {
+                if ($value >= $min) {
                     return true;
                 }
             } elseif (is_string($value)) {
-                if (strlen($value) > $min) {
+                if (strlen($value) >= $min) {
                     return true;
                 }
-            } elseif (is_file($value)) {
+            } elseif (is_file($value['tmp_name'])) {
                 $fileSize = ($value['size'] / 1024);
-                if ($fileSize > $min) {
+                if ($fileSize >= $min) {
                     return true;
                 }
             }
@@ -360,16 +360,16 @@ class Validator
         if ($this->required($value)) {
             // is_numeric or is_integer ?
             if (is_numeric($value)) {
-                if ($value > $max) {
+                if ($value <= $max) {
                     return true;
                 }
             } elseif (is_string($value)) {
-                if (strlen($value) > $max) {
+                if (strlen($value) <= $max) {
                     return true;
                 }
-            } elseif (is_file($value)) {
+            } elseif (is_file($value['tmp_name'])) {
                 $fileSize = ($value['size'] / 1024);
-                if ($fileSize > $max) {
+                if ($fileSize <= $max) {
                     return true;
                 }
             }
@@ -404,11 +404,10 @@ class Validator
                 if (strlen($value) == $size) {
                     return true;
                 }
-            } elseif (is_array($value)) {
-                if (count($value) == $size) {
-                    return true;
-                }
-            } elseif (is_file($value)) {
+            /**
+             * @todo add array validation
+             */
+            } elseif (is_file($value['tmp_name'])) {
                 $fileSize = ($value['size'] / 1024);
                 if ($fileSize == $size) {
                     return true;
@@ -453,7 +452,7 @@ class Validator
                 '-\x{ffff}0-9]+-?)*[a-z\x{00a1}-\x{ffff}0-9]+)*(?:\.(?:[a-z\x{00a1}-\x{ffff}]{2,})))'.
                 '(?::\d{2,5})?(?:\/[^\s]*)?$/iuS',
             $value) :
-            true;
+            false;
     }
 
     /**
@@ -463,11 +462,11 @@ class Validator
      *
      * @return bool
      */
-    public function validUrl($value)
+    public function validDomain($value)
     {
         return $this->required($value) ?
-            $this->url($value) && checkdnsrr($value) :
-            true;
+            checkdnsrr($value) :
+            false;
     }
 
     /**
