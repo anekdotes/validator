@@ -404,9 +404,6 @@ class Validator
                 if (strlen($value) == $size) {
                     return true;
                 }
-            /**
-             * @todo add array validation
-             */
             } elseif (is_file($value['tmp_name'])) {
                 $fileSize = ($value['size'] / 1024);
                 if ($fileSize == $size) {
