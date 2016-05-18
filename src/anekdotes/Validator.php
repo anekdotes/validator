@@ -303,7 +303,7 @@ class Validator
             return false;
         }
 
-        return true;
+        return false;
     }
 
     /**
@@ -340,7 +340,7 @@ class Validator
             return false;
         }
 
-        return true;
+        return false;
     }
 
     /**
@@ -377,7 +377,7 @@ class Validator
             return false;
         }
 
-        return true;
+        return false;
     }
 
     /**
@@ -414,7 +414,7 @@ class Validator
             return false;
         }
 
-        return true;
+        return false;
     }
 
     /**

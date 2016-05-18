@@ -241,6 +241,10 @@ class ValidatorTest extends PHPUnit_Framework_TestCase
     public function testBetweenFail()
     {
         $rules = ['test1' => ['between:1,3']];
+        $input = ['test1' => ''];
+        $v = Validator::make($input, $rules);
+        $this->assertTrue($v->fail());
+        $rules = ['test1' => ['between:1,3']];
         $input = ['test1' => 1];
         $v = Validator::make($input, $rules);
         $this->assertTrue($v->fail());
@@ -284,6 +288,10 @@ class ValidatorTest extends PHPUnit_Framework_TestCase
 
     public function testMinimumFail()
     {
+        $rules = ['test1' => ['minimum:2']];
+        $input = ['test1' => ''];
+        $v = Validator::make($input, $rules);
+        $this->assertTrue($v->fail());
         $rules = ['test1' => ['minimum:2']];
         $input = ['test1' => 1];
         $v = Validator::make($input, $rules);
@@ -329,6 +337,10 @@ class ValidatorTest extends PHPUnit_Framework_TestCase
     public function testMaximumFail()
     {
         $rules = ['test1' => ['maximum:2']];
+        $input = ['test1' => ''];
+        $v = Validator::make($input, $rules);
+        $this->assertTrue($v->fail());
+        $rules = ['test1' => ['maximum:2']];
         $input = ['test1' => 3];
         $v = Validator::make($input, $rules);
         $this->assertTrue($v->fail());
@@ -372,6 +384,10 @@ class ValidatorTest extends PHPUnit_Framework_TestCase
 
     public function testSizeFail()
     {
+        $rules = ['test1' => ['size:2']];
+        $input = ['test1' => ''];
+        $v = Validator::make($input, $rules);
+        $this->assertTrue($v->fail());
         $rules = ['test1' => ['size:2']];
         $input = ['test1' => 3];
         $v = Validator::make($input, $rules);
