@@ -531,7 +531,7 @@ class ValidatorTest extends PHPUnit_Framework_TestCase
         $v = Validator::make($input, $rules);
         $this->assertTrue($v->fail());
     }
-    
+
     public function testAlphaFailWithNonalphanum()
     {
         $rules = ['test1' => ['alpha']];
@@ -551,5 +551,4 @@ class ValidatorTest extends PHPUnit_Framework_TestCase
         $v = Validator::make($input, $rules);
         $this->assertFalse($v->fail());
     }
-
 }
