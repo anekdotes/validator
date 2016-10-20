@@ -491,7 +491,6 @@ class Validator
         return $value === $this->items[$this->currentItemName.'_confirmation'];
     }
 
-
     /**
      * Check if value only contains letters and numbers.
      *
