@@ -499,7 +499,6 @@ class Validator
      * "alpha_dash"       => "The :attribute may only contain letters, numbers, and dashes.",
      * "alpha_num"        => "The :attribute may only contain letters and numbers.",
      * "before"           => "The :attribute must be a date before :date.",
-     * "confirmed"        => "The :attribute confirmation does not match.",
      * "date_format"      => "The :attribute does not match the format :format.",
      * "digits"           => "The :attribute must be :digits digits.",
      * "digits_between"   => "The :attribute must be between :min and :max digits.",
