@@ -10,6 +10,7 @@
  */
 
 /** namespace and use */
+
 namespace anekdotes;
 
 /** Validator class, validate passed Input */
