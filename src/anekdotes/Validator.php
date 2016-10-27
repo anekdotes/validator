@@ -515,11 +515,22 @@ class Validator
         return ctype_alnum($value);
     }
 
+    /**
+     * Check if value only contains letters, dashes and numbers.
+     *
+     * @param string $value to check
+     *
+     * @return bool
+     */
+    public function alpha_dash($value)
+    {
+        return preg_match('/^[\w\-]*$/', $value);
+    }
+
     /*
      * @todo
      * "accepted"         => "The :attribute must be accepted.",
      * "after"            => "The :attribute must be a date after :date.",
-     * "alpha_dash"       => "The :attribute may only contain letters, numbers, and dashes.",
      * "before"           => "The :attribute must be a date before :date.",
      * "confirmed"        => "The :attribute confirmation does not match.",
      * "date_format"      => "The :attribute does not match the format :format.",

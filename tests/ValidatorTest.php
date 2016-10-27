@@ -552,6 +552,16 @@ class ValidatorTest extends PHPUnit_Framework_TestCase
         $this->assertTrue($v->fail());
     }
 
+    public function testAlphaDashFail()
+    {
+        $rules = ['test1' => ['alpha_dash']];
+        $input = [
+            'test1'  => '!@#$%?',
+        ];
+        $v = Validator::make($input, $rules);
+        $this->assertTrue($v->fail());
+    }
+
     public function testAlphaSuccess()
     {
         $rules = ['test1' => ['alpha']];
@@ -567,6 +577,16 @@ class ValidatorTest extends PHPUnit_Framework_TestCase
         $rules = ['test1' => ['alpha_num']];
         $input = [
             'test1' => 'hello123',
+        ];
+        $v = Validator::make($input, $rules);
+        $this->assertFalse($v->fail());
+    }
+
+    public function testAlphaDashSuccess()
+    {
+        $rules = ['test1' => ['alpha_dash']];
+        $input = [
+            'test1' => 'hello-123',
         ];
         $v = Validator::make($input, $rules);
         $this->assertFalse($v->fail());
