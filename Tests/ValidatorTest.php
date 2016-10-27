@@ -256,7 +256,7 @@ class ValidatorTest extends PHPUnit_Framework_TestCase
         $input = ['test1' => [
           'name'     => 'pdf-test.pdf',
           'type'     => 'application/pdf',
-          'tmp_name' => './tests/files/pdf-test.pdf',
+          'tmp_name' => './Tests/files/pdf-test.pdf',
           'error'    => 0,
           'size'     => 7734,
         ]];
@@ -278,7 +278,7 @@ class ValidatorTest extends PHPUnit_Framework_TestCase
         $input = ['test1' => [
           'name'     => 'pdf-test.pdf',
           'type'     => 'application/pdf',
-          'tmp_name' => './tests/files/pdf-test.pdf',
+          'tmp_name' => './Tests/files/pdf-test.pdf',
           'error'    => 0,
           'size'     => 7734,
         ]];
@@ -304,7 +304,7 @@ class ValidatorTest extends PHPUnit_Framework_TestCase
         $input = ['test1' => [
           'name'     => 'pdf-test.pdf',
           'type'     => 'application/pdf',
-          'tmp_name' => './tests/files/pdf-test.pdf',
+          'tmp_name' => './Tests/files/pdf-test.pdf',
           'error'    => 0,
           'size'     => 7734,
         ]];
@@ -326,7 +326,7 @@ class ValidatorTest extends PHPUnit_Framework_TestCase
         $input = ['test1' => [
           'name'     => 'pdf-test.pdf',
           'type'     => 'application/pdf',
-          'tmp_name' => './tests/files/pdf-test.pdf',
+          'tmp_name' => './Tests/files/pdf-test.pdf',
           'error'    => 0,
           'size'     => 7734,
         ]];
@@ -352,7 +352,7 @@ class ValidatorTest extends PHPUnit_Framework_TestCase
         $input = ['test1' => [
           'name'     => 'pdf-test.pdf',
           'type'     => 'application/pdf',
-          'tmp_name' => './tests/files/pdf-test.pdf',
+          'tmp_name' => './Tests/files/pdf-test.pdf',
           'error'    => 0,
           'size'     => 7734,
         ]];
@@ -374,7 +374,7 @@ class ValidatorTest extends PHPUnit_Framework_TestCase
         $input = ['test1' => [
           'name'     => 'pdf-test.pdf',
           'type'     => 'application/pdf',
-          'tmp_name' => './tests/files/pdf-test.pdf',
+          'tmp_name' => './Tests/files/pdf-test.pdf',
           'error'    => 0,
           'size'     => 7734,
         ]];
@@ -400,7 +400,7 @@ class ValidatorTest extends PHPUnit_Framework_TestCase
         $input = ['test1' => [
           'name'     => 'pdf-test.pdf',
           'type'     => 'application/pdf',
-          'tmp_name' => './tests/files/pdf-test.pdf',
+          'tmp_name' => './Tests/files/pdf-test.pdf',
           'error'    => 0,
           'size'     => 7734,
         ]];
@@ -422,7 +422,7 @@ class ValidatorTest extends PHPUnit_Framework_TestCase
         $input = ['test1' => [
           'name'     => 'pdf-test.pdf',
           'type'     => 'application/pdf',
-          'tmp_name' => './tests/files/pdf-test.pdf',
+          'tmp_name' => './Tests/files/pdf-test.pdf',
           'error'    => 0,
           'size'     => 7168,
         ]];
