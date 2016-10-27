@@ -532,7 +532,6 @@ class Validator
      * "accepted"         => "The :attribute must be accepted.",
      * "after"            => "The :attribute must be a date after :date.",
      * "before"           => "The :attribute must be a date before :date.",
-     * "confirmed"        => "The :attribute confirmation does not match.",
      * "date_format"      => "The :attribute does not match the format :format.",
      * "digits"           => "The :attribute must be :digits digits.",
      * "digits_between"   => "The :attribute must be between :min and :max digits.",
