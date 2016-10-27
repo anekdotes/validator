@@ -9,8 +9,6 @@
  * file that was distributed with this source code.
  */
 
-/** namespace and use */
-
 namespace anekdotes;
 
 /** Validator class, validate passed Input */
