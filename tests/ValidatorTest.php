@@ -521,4 +521,24 @@ class ValidatorTest extends PHPUnit_Framework_TestCase
         $v = Validator::make($input, $rules);
         $this->assertFalse($v->fail());
     }
+
+    public function testAlphaNumFail()
+    {
+        $rules = ['test1' => ['alpha_num']];
+        $input = [
+            'test1'  => '!@#$%?',
+        ];
+        $v = Validator::make($input, $rules);
+        $this->assertTrue($v->fail());
+    }
+
+    public function testAlphanumSuccess()
+    {
+        $rules = ['test1' => ['alpha_num']];
+        $input = [
+            'test1' => 'hello123',
+        ];
+        $v = Validator::make($input, $rules);
+        $this->assertFalse($v->fail());
+    }
 }
