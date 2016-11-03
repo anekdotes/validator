@@ -566,6 +566,25 @@ class Validator
         return strtotime($value) < strtotime($date);
     }
 
+    /**
+     * Check if value is a specific amount of digits.
+     *
+     * @param string $value  to check
+     * @param string $digits to check against
+     *
+     * @return bool
+     */
+    public function digits($value, $digits)
+    {
+        if (!is_numeric($value)) {
+            return false;
+        }
+        if (!is_numeric($digits)) {
+            return false;
+        }
+
+        return strlen($value) == intval($digits);
+    }
     /*
      * @todo
      * "accepted"         => "The :attribute must be accepted.",

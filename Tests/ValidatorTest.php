@@ -671,4 +671,44 @@ class ValidatorTest extends PHPUnit_Framework_TestCase
         $v = Validator::make($input, $rules);
         $this->assertTrue($v->fail());
     }
+
+    public function testDigitsSuccess()
+    {
+        $rules = ['test1' => ['digits:4']];
+        $input = [
+            'test1' => '1234',
+        ];
+        $v = Validator::make($input, $rules);
+        $this->assertFalse($v->fail());
+    }
+
+    public function testDigitsFail()
+    {
+        $rules = ['test1' => ['digits:14']];
+        $input = [
+            'test1' => '2014',
+        ];
+        $v = Validator::make($input, $rules);
+        $this->assertTrue($v->fail());
+    }
+
+    public function testDigitsInvalidFirstNumber()
+    {
+        $rules = ['test1' => ['before:abc']];
+        $input = [
+            'test1' => '2014',
+        ];
+        $v = Validator::make($input, $rules);
+        $this->assertTrue($v->fail());
+    }
+
+    public function testDigitsInvalidSecondNumber()
+    {
+        $rules = ['test1' => ['before:1']];
+        $input = [
+            'test1' => 'a',
+        ];
+        $v = Validator::make($input, $rules);
+        $this->assertTrue($v->fail());
+    }
 }
