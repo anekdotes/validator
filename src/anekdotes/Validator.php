@@ -530,16 +530,19 @@ class Validator
      * Check if value is a date after :date.
      *
      * @param string $value to check
-     * @param string $date to check against
+     * @param string $date  to check against
      *
      * @return bool
      */
     public function after($value, $date)
     {
-        if(!$this->date($value))
+        if (!$this->date($value)) {
             return false;
-        if(!$this->date($date))
+        }
+        if (!$this->date($date)) {
             return false;
+        }
+
         return strtotime($value) > strtotime($date);
     }
 
