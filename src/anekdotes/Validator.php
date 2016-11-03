@@ -526,6 +526,23 @@ class Validator
         return preg_match('/^[\w\-]*$/', $value);
     }
 
+    /**
+     * Check if value is a date after :date.
+     *
+     * @param string $value to check
+     * @param string $date to check against
+     *
+     * @return bool
+     */
+    public function after($value, $date)
+    {
+        if(!$this->date($value))
+            return false;
+        if(!$this->date($date))
+            return false;
+        return strtotime($value) > strtotime($date);
+    }
+
     /*
      * @todo
      * "accepted"         => "The :attribute must be accepted.",

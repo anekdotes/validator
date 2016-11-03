@@ -12,7 +12,7 @@
 
 A validator class to validate any type of input against any type of validation.
 
-	// initate the Validator with inputs and rules
+	// initiate the Validator with inputs and rules
 	$validator = Validator::make($inputs, $rules);
 
 	// test if validator pass all the tests
