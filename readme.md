@@ -191,25 +191,25 @@ Check if the input contains only alphabetic,numeric and dashes characters
 
 Check if the input if a date older than the provided :date
 
-  array('input' => array('before:yyyy-mm-dd'));
+    array('input' => array('before:yyyy-mm-dd'));
 
 #### after
 
 Check if the input if a date younger than the provided :date
 
-  array('input' => array('after:yyyy-mm-dd'));
+    array('input' => array('after:yyyy-mm-dd'));
 
 #### digits
 
 Check if the input contains exactly x digits
 
-  array('input' => array('digits:x'));
+    array('input' => array('digits:x'));
 
 #### digits_between
 
 Check if the input contains between x and y digits
 
-  array('input' => array('digits_between:x,y'));
+    array('input' => array('digits_between:x,y'));
 
 #### confirmed
 
