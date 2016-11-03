@@ -546,11 +546,29 @@ class Validator
         return strtotime($value) > strtotime($date);
     }
 
+    /**
+     * Check if value is a date before :date.
+     *
+     * @param string $value to check
+     * @param string $date  to check against
+     *
+     * @return bool
+     */
+    public function before($value, $date)
+    {
+        if (!$this->date($value)) {
+            return false;
+        }
+        if (!$this->date($date)) {
+            return false;
+        }
+
+        return strtotime($value) < strtotime($date);
+    }
+
     /*
      * @todo
      * "accepted"         => "The :attribute must be accepted.",
-     * "after"            => "The :attribute must be a date after :date.",
-     * "before"           => "The :attribute must be a date before :date.",
      * "date_format"      => "The :attribute does not match the format :format.",
      * "digits"           => "The :attribute must be :digits digits.",
      * "digits_between"   => "The :attribute must be between :min and :max digits.",

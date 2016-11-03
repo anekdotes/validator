@@ -611,4 +611,24 @@ class ValidatorTest extends PHPUnit_Framework_TestCase
         $v = Validator::make($input, $rules);
         $this->assertFalse($v->fail());
     }
+
+    public function testBeforeSuccess()
+    {
+        $rules = ['test1' => ['before:2012-11-14']];
+        $input = [
+            'test1' => '2011-10-13',
+        ];
+        $v = Validator::make($input, $rules);
+        $this->assertFalse($v->fail());
+    }
+
+    public function testBeforeFail()
+    {
+        $rules = ['test1' => ['before:2012-11-14']];
+        $input = [
+            'test1' => '2014-10-13',
+        ];
+        $v = Validator::make($input, $rules);
+        $this->assertTrue($v->fail());
+    }
 }
