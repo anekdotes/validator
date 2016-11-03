@@ -612,6 +612,26 @@ class ValidatorTest extends PHPUnit_Framework_TestCase
         $this->assertFalse($v->fail());
     }
 
+    public function testAfterInvalidFirstDate()
+    {
+        $rules = ['test1' => ['after:abc']];
+        $input = [
+            'test1' => '2014-10-13',
+        ];
+        $v = Validator::make($input, $rules);
+        $this->assertTrue($v->fail());
+    }
+
+    public function testAfterInvalidSecondDate()
+    {
+        $rules = ['test1' => ['after:2012-11-14']];
+        $input = [
+            'test1' => 'abc',
+        ];
+        $v = Validator::make($input, $rules);
+        $this->assertTrue($v->fail());
+    }
+
     public function testBeforeSuccess()
     {
         $rules = ['test1' => ['before:2012-11-14']];
@@ -627,6 +647,26 @@ class ValidatorTest extends PHPUnit_Framework_TestCase
         $rules = ['test1' => ['before:2012-11-14']];
         $input = [
             'test1' => '2014-10-13',
+        ];
+        $v = Validator::make($input, $rules);
+        $this->assertTrue($v->fail());
+    }
+
+    public function testBeforeInvalidFirstDate()
+    {
+        $rules = ['test1' => ['before:abc']];
+        $input = [
+            'test1' => '2014-10-13',
+        ];
+        $v = Validator::make($input, $rules);
+        $this->assertTrue($v->fail());
+    }
+
+    public function testBeforeInvalidSecondDate()
+    {
+        $rules = ['test1' => ['before:2012-11-14']];
+        $input = [
+            'test1' => 'abc',
         ];
         $v = Validator::make($input, $rules);
         $this->assertTrue($v->fail());
