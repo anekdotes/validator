@@ -585,12 +585,37 @@ class Validator
 
         return strlen($value) == intval($digits);
     }
+
+    /**
+     * Check if an integer value is between a specific amount of digits long.
+     *
+     * @param string $value       to check
+     * @param string $lowerDigits to check against
+     * @param string $upperDigits to check against
+     *
+     * @return bool
+     */
+    public function digits_between($value, $lowerDigits, $upperDigits)
+    {
+        if (!is_numeric($value)) {
+            return false;
+        }
+        if (!is_numeric($lowerDigits)) {
+            return false;
+        }
+        if (!is_numeric($upperDigits)) {
+            return false;
+        }
+
+        $len = strlen($value);
+
+        return $len >= intval($lowerDigits) && $len <= intval($upperDigits);
+    }
+
     /*
      * @todo
      * "accepted"         => "The :attribute must be accepted.",
      * "date_format"      => "The :attribute does not match the format :format.",
-     * "digits"           => "The :attribute must be :digits digits.",
-     * "digits_between"   => "The :attribute must be between :min and :max digits.",
      * "exists"           => "The selected :attribute is invalid.",
      * "image"            => "The :attribute must be an image.",
      * "in"               => "The selected :attribute is invalid.",

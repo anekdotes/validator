@@ -694,7 +694,7 @@ class ValidatorTest extends PHPUnit_Framework_TestCase
 
     public function testDigitsInvalidFirstNumber()
     {
-        $rules = ['test1' => ['before:abc']];
+        $rules = ['test1' => ['digits:abc']];
         $input = [
             'test1' => '2014',
         ];
@@ -704,7 +704,57 @@ class ValidatorTest extends PHPUnit_Framework_TestCase
 
     public function testDigitsInvalidSecondNumber()
     {
-        $rules = ['test1' => ['before:1']];
+        $rules = ['test1' => ['digits:1']];
+        $input = [
+            'test1' => 'a',
+        ];
+        $v = Validator::make($input, $rules);
+        $this->assertTrue($v->fail());
+    }
+
+    public function testDigitsBetweenSuccess()
+    {
+        $rules = ['test1' => ['digits_between:4,6']];
+        $input = [
+            'test1' => '1234',
+        ];
+        $v = Validator::make($input, $rules);
+        $this->assertFalse($v->fail());
+    }
+
+    public function testDigitsBetweenFail()
+    {
+        $rules = ['test1' => ['digits_between:4,6']];
+        $input = [
+            'test1' => '201',
+        ];
+        $v = Validator::make($input, $rules);
+        $this->assertTrue($v->fail());
+    }
+
+    public function testDigitsBetweenInvalidFirstNumber()
+    {
+        $rules = ['test1' => ['digits_between:abc,1']];
+        $input = [
+            'test1' => '2014',
+        ];
+        $v = Validator::make($input, $rules);
+        $this->assertTrue($v->fail());
+    }
+
+    public function testDigitsBetweenInvalidSecondNumber()
+    {
+        $rules = ['test1' => ['digits_between:1,abc']];
+        $input = [
+            'test1' => '2014',
+        ];
+        $v = Validator::make($input, $rules);
+        $this->assertTrue($v->fail());
+    }
+
+    public function testDigitsBetweenInvalidThirdNumber()
+    {
+        $rules = ['test1' => ['digits_between:1,2']];
         $input = [
             'test1' => 'a',
         ];
