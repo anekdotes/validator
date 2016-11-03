@@ -169,7 +169,47 @@ Check if confirmed value is the same
 
 	array('input' => array('same:input_name'));
 
+#### alpha
 
+Check if the input contains only alphabetic characters
+
+	array('input' => array('alpha'));
+
+#### alpha_num
+
+Check if the input contains only alphabetic and numeric characters
+
+	array('input' => array('alpha_num'));
+
+#### alpha_dash
+
+Check if the input contains only alphabetic,numeric and dashes characters
+
+	array('input' => array('alpha_dash'));
+
+#### before
+
+Check if the input if a date older than the provided :date
+
+  array('input' => array('before:yyyy-mm-dd'));
+
+#### after
+
+Check if the input if a date younger than the provided :date
+
+  array('input' => array('after:yyyy-mm-dd'));
+
+#### digits
+
+Check if the input contains exactly x digits
+
+  array('input' => array('digits:x'));
+
+#### digits_between
+
+Check if the input contains between x and y digits
+
+  array('input' => array('digits_between:x,y'));
 
 #### confirmed
 
