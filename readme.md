@@ -354,19 +354,38 @@ Check if the input has the exact string length provided (works the samne way as 
 
 #### url
 
-Check if the input match an URL
+Check if the input matches a URL
 
-	array('input' => array('url'));
+```php
+  $rules = ["inputField" => "url"];
+
+  //The following inputs would validate as a failure
+  $inputA = ["inputField" => "ta"];
+
+  //The following inputs would validate as a success
+  $inputB = ["inputField" => "http://www.anekdotes.com"];
+  $inputC = ["inputField" => "www.google.ca"];
+
+```
 
 #### validUrl
 
-Check if the input match an URL that is valid
+Check if the input matches an existing URL, based on PHP's DNS Check
 
-	array('input' => array('validUrl'));
+```php
+  $rules = ["inputField" => "validUrl"];
+
+  //The following inputs would validate as a failure
+  $inputA = ["inputField" => "ta"];
+
+  //The following inputs would validate as a success
+  $inputB = ["inputField" => "http://www.anekdotes.com"];
+  $inputC = ["inputField" => "www.google.ca"];
+```
 
 #### same
 
-Check if confirmed value is the same
+Check if the input had the same value as another input (useful for password checks)
 
 	array('input' => array('same:input_name'));
 
