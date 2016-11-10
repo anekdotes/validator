@@ -63,6 +63,14 @@ Check if the input is empty
 
 ```php
   $rules = ["inputField" => "required"];
+
+  //The following inputs would validate as a failure
+  $inputA = ["inputField" : "" ];
+  $inputB = ["otherInput" : "Whatever" ];
+
+  //The following inputs would validate as a success
+  $inputC = ["inputField" : "Something" ];
+  $inputD = ["inputField" : "Stuff" , "otherInput" : "anythingElse"];
 ```
 
 #### requiredIf
@@ -117,25 +125,58 @@ Check if the input is empty if an other input is empty
   $inputD = ["inputField" : "Data" , "otherInput" : "otherInputsValue"];
   $inputE = ["inputField" : "Data" , "otherInput" : ""];
 ```
-	array('input' => array('requiredWithout:other_input'))
 
 #### integer
 
-Check if the input is integer
+Check if the input is an integer
 
-	array('input' => array('integer'))
+```php
+
+  $rules = ["inputField" => "integer"];
+
+  //The following inputs would validate as a failure
+  $inputA = ["inputField" : "a"];
+  $inputB = ["inputField" : "12"];
+  $inputC = ["inputField" : 12.3];
+
+  //The following inputs would validate as a success
+  $inputD = ["inputField" : 1];
+
+```
 
 #### numeric
 
 Check if the input is numeric
 
-	array('input' => array('numeric'))
+```php
+
+  $rules = ["inputField" => "numeric"];
+
+  //The following inputs would validate as a failure
+  $inputA = ["inputField" : "a"];
+
+  //The following inputs would validate as a success
+  $inputB = ["inputField" : "12"];
+  $inputC = ["inputField" : 12.3];
+  $inputD = ["inputField" : 1];
+
+```
 
 #### date
 
 Check if the input is a date
 
-	array('input' => array('date'))
+```php
+
+  $rules = ["inputField" => "date"];
+
+  //The following inputs would validate as a failure
+  $inputA = ["inputField" : "a"];
+
+  //The following inputs would validate as a success
+  $inputB = ["inputField" : "1-1-2000"];
+
+```
 
 #### different
 
