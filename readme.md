@@ -10,26 +10,52 @@
 
 ---
 
-A validator class to validate any type of input against any type of validation.
+A validator class to validate input data against validation types.
 
-	// initiate the Validator with inputs and rules
-	$validator = Validator::make($inputs, $rules);
+## Installation
 
-	// test if validator pass all the tests
-	if($validator->fail()) {
-		// return with $validator->errors, an array of all error messages
-	}
-	else {
-		// do your stuff
-	}
+Install via composer in your project : 
 
-`$inputs` must be an array of all your input and `$rules` must be an array of all the rules :
+  composer require anekdotes/validator
 
-	$rules = array(
-		'name' => array('required'),
-		'email' => array('required', 'email'),
-		'age' => array('integer')
-	)
+## Basic usage
+
+Prepare an input array to validate and a rules array to validate against
+
+```php
+  $input = [
+    "formName" => $_POST["formName"],
+    "formEmail" => $_POST["formEmail"],
+    "otherData" => "Bob"
+  ];
+
+  $rules = [
+    "formName" => ["required"],
+    "formEmail" => ["required", "email"]
+  ]
+```
+
+Then, instantiate the validator with the rules and use its status to follow-up with code.
+```php
+// initiate the Validator with inputs and rules
+use Anekdotes\Validator;
+function doSomething(){
+    $validator = Validator::make($inputs, $rules);
+
+    // test if validator pass all the tests
+    if($validator->fail()) {
+        //Log something maybe?
+        //Display a message maybe?
+        return false;
+	  }
+    
+    //Proceed with the data
+    //Store it in the db?
+
+}
+```
+
+## Rule Types
 
 #### required
 
