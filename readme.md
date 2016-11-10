@@ -387,52 +387,142 @@ Check if the input matches an existing URL, based on PHP's DNS Check
 
 Check if the input had the same value as another input (useful for password checks)
 
-	array('input' => array('same:input_name'));
+```php
+  $rules = ["inputField" => "same:otherInput"];
+
+  //The following inputs would validate as a failure
+  $inputA = ["inputField" => "" , "otherInput" => "otherInputsValue"];
+  $inputB = ["inputField" => "maybe" , "otherInput" => "anythingElse"];
+
+  //The following inputs would validate as a success
+  $inputC = ["inputField" => "qwerty123456", "otherInput" => "qwerty123456"];
+  $inputE = ["inputField" => "Data" , "otherInput" => "Data"];
+```
 
 #### alpha
 
 Check if the input contains only alphabetic characters
 
-	array('input' => array('alpha'));
+```php
+  $rules = ["inputField" => "alpha"];
+
+  //The following inputs would validate as a failure
+  $inputA = ["inputField" => "a12b"];
+  $inputB = ["inputField" => "hi there"];
+  $inputC = ["inputField" => "marks-the-spot"];
+
+  //The following inputs would validate as a success
+  $inputD = ["inputField" => "anekdotes"];
+```
+
 
 #### alpha_num
 
 Check if the input contains only alphabetic and numeric characters
 
-	array('input' => array('alpha_num'));
+```php
+  $rules = ["inputField" => "alpha_num"];
+
+  //The following inputs would validate as a failure
+  $inputB = ["inputField" => "hi there"];
+  $inputC = ["inputField" => "marks-the-spot"];
+
+  //The following inputs would validate as a success
+  $inputA = ["inputField" => "a12b"];
+  $inputD = ["inputField" => "anekdotes"];
+```
 
 #### alpha_dash
 
 Check if the input contains only alphabetic,numeric and dashes characters
 
-	array('input' => array('alpha_dash'));
+```php
+  $rules = ["inputField" => "alpha_num"];
+
+  //The following inputs would validate as a failure
+  $inputB = ["inputField" => "hi there"];
+
+  //The following inputs would validate as a success
+  $inputA = ["inputField" => "a12b"];
+  $inputC = ["inputField" => "marks-the-spot"];
+  $inputD = ["inputField" => "anekdotes"];
+```
 
 #### before
 
-Check if the input if a date older than the provided :date
+Check if the input is a date older than the provided :date
 
-    array('input' => array('before:yyyy-mm-dd'));
+```php
+  $rules = ["inputField" => "before:2016-12-31"];
+
+  //The following inputs would validate as a failure
+  $inputA = ["inputField" => "hi there"];
+  $inputB = ["inputField" => "2017-01-01"];
+
+  //The following inputs would validate as a success
+  $inputC = ["inputField" => "2015-02-28"];
+```
 
 #### after
 
 Check if the input if a date younger than the provided :date
 
-    array('input' => array('after:yyyy-mm-dd'));
+```php
+  $rules = ["inputField" => "after:2016-12-31"];
+
+  //The following inputs would validate as a failure
+  $inputA = ["inputField" => "hi there"];
+  $inputC = ["inputField" => "2015-02-28"];
+
+  //The following inputs would validate as a success
+  $inputB = ["inputField" => "2017-01-01"];
+```
 
 #### digits
 
-Check if the input contains exactly x digits
+Check if the input is an integer that contains exactly x digits
 
-    array('input' => array('digits:x'));
+```php
+  $rules = ["inputField" => "digits:4"];
+
+  //The following inputs would validate as a failure
+  $inputA = ["inputField" => "1234567890"];
+  $inputB = ["inputField" => "1a28"];
+
+  //The following inputs would validate as a success
+  $inputC = ["inputField" => "2017"];
+```
 
 #### digits_between
 
-Check if the input contains between x and y digits
+Check if the input 
 
-    array('input' => array('digits_between:x,y'));
+Check if the input is an integer that contains between x and y digits
+
+```php
+  $rules = ["inputField" => "digits_between:4,6"];
+
+  //The following inputs would validate as a failure
+  $inputA = ["inputField" => "1234567890"];
+  $inputB = ["inputField" => "1a28"];
+
+  //The following inputs would validate as a success
+  $inputC = ["inputField" => "2017"];
+  $inputD = ["inputField" => "201712"];
+```
 
 #### confirmed
 
-Check if the input_confirmation value is the same then the input
+Checks that if a confirmation field has the same value that the other one (Perfect for password or email checks)
+```php
+  $rules = ["inputField" => "confirmed"];
 
-	array('input' => array('confirmed'));
+  //The following inputs would validate as a failure
+  $inputA = ["inputField" => "qwerty123" , "inputField_confirmation" => "123456"];
+  $inputB = ["inputField" => "" , "inputField_confirmation" => "123456"];
+  $inputC = ["inputField" => "123456"];
+
+  //The following inputs would validate as a success
+  $inputD = ["inputField" => "123456" , "inputField_confirmation" => "123456"];
+  $inputE = ["inputField" => "test@test.test" , "inputField_confirmation" => "test@test.test"];
+```
