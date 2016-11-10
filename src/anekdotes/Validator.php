@@ -306,7 +306,7 @@ class Validator
     }
 
     /**
-     * Check if the $value is under $min
+     * Check if the $value is above $min
      * You can put
      * string : test string length
      * number : test number size
@@ -343,7 +343,7 @@ class Validator
     }
 
     /**
-     * Check if the $value is over $max
+     * Check if the $value is under $max
      * You can put
      * string : test string length
      * number : test number size
