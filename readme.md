@@ -16,7 +16,7 @@ A validator class to validate input data against validation types.
 
 Install via composer in your project : 
 
-  composer require anekdotes/validator
+    composer require anekdotes/validator
 
 ## Basic usage
 
@@ -61,24 +61,62 @@ function doSomething(){
 
 Check if the input is empty
 
-	array('input' => array('required'))
+```php
+  $rules = ["inputField" => "required"];
+```
 
 #### requiredIf
 
-Check if the input is empty if an other input has a conditionnal value
+Check if the input is empty, but only if an other input's value equals a specific value
 
-	array('input' => array('requiredIf:other_input,conditionnal_value'))
+```php
+  $rules = ["inputField" => "requiredIf:otherInput,otherInputsValue"];
+
+  //The following inputs would validate as a failure
+  $inputA = ["inputField" : "" , "otherInput" : "otherInputsValue"];
+
+  //The following inputs would validate as a success
+  $inputB = ["inputField" : "" , "otherInput" : "anythingElse"];
+  $inputC = ["inputField" : ""];
+  $inputD = ["inputField" : "Data" , "otherInput" : "otherInputsValue"];
+  $inputE = ["inputField" : "Data" , "otherInput" : ""];
+```
 
 #### requiredWith
 
 Check if the input is empty if an other input is not empty
 
-	array('input' => array('requiredWith:other_input'))
+```php
+
+  $rules = ["inputField" => "requiredWith:otherInput"];
+
+  //The following inputs would validate as a failure
+  $inputA = ["inputField" : "" , "otherInput" : "otherInputsValue"];
+  $inputB = ["inputField" : "" , "otherInput" : "anythingElse"];
+
+  //The following inputs would validate as a success
+  $inputC = ["inputField" : ""];
+  $inputD = ["inputField" : "Data" , "otherInput" : "otherInputsValue"];
+  $inputE = ["inputField" : "Data" , "otherInput" : ""];
+```
 
 #### requiredWithout
 
 Check if the input is empty if an other input is empty
 
+```php
+
+  $rules = ["inputField" => "requiredWithout:otherInput"];
+
+  //The following inputs would validate as a failure
+  $inputC = ["inputField" : ""];
+
+  //The following inputs would validate as a success
+  $inputA = ["inputField" : "" , "otherInput" : "otherInputsValue"];
+  $inputB = ["inputField" : "" , "otherInput" : "anythingElse"];
+  $inputD = ["inputField" : "Data" , "otherInput" : "otherInputsValue"];
+  $inputE = ["inputField" : "Data" , "otherInput" : ""];
+```
 	array('input' => array('requiredWithout:other_input'))
 
 #### integer
