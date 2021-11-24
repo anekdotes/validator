@@ -243,12 +243,13 @@ class Validator
      */
     public function postalCode($value)
     {
-        return $this->required($value) ?
-            (bool) preg_match(
-                '/^[ABCEGHJKLMNPRSTVXY]{1}\d{1}[A-Z]{1}[\s-_]*\d{1}[A-Z]{1}\d{1}$/i',
-                $value
-            ) :
-            true;
+        $valid = true;
+
+        if ($this->required($value)) {
+            $valid = filter_var(preg_match('/^[ABCEGHJKLMNPRSTVXY]{1}\d{1}[A-Z]{1}[\s\-\_]*\d{1}[A-Z]{1}\d{1}$/i', $value), FILTER_VALIDATE_BOOLEAN);
+        }
+
+        return $valid;
     }
 
     /**

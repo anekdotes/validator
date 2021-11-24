@@ -12,9 +12,9 @@
 namespace Tests;
 
 use Anekdotes\Validator;
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 
-class ValidatorTest extends PHPUnit_Framework_TestCase
+final class ValidatorTest extends TestCase
 {
     public function testIfValidatorCanBeCreated()
     {
